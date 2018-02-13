@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service
+@Service("employeeService")
 @Transactional
 public class EmployeeServiceImpl  implements EmployeeService{
 

@@ -1,3 +1,4 @@
+/*
 package com.wuxin.test;
 
 import com.wuxin.entity.Department;
@@ -17,23 +18,32 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class MapperTest {
     @Autowired
     DepartmentMapper departmentMapper;
-    /**
+    */
+/**
      *测试Department 的Mapper
-     */
+     *//*
+
 
     @Test
     public void testCRUD(){
         //创建ioc容器
-        /* 原生
+        */
+/* 原生
         ApplicationContext ioc = new ClassPathXmlApplicationContext("applicationContext.xml");
         //从容器中获取mapper
-        DepartmentMapper bean =  ioc.getBean(DepartmentMapper.class);*/
-        /*System.out.println(departmentMapper);*/
+        DepartmentMapper bean =  ioc.getBean(DepartmentMapper.class);*//*
+
+        */
+/*System.out.println(departmentMapper);*//*
+
 
         //插入部门
-        /*departmentMapper.insertSelective(new Department(null,"开发部"));
-        departmentMapper.insertSelective(new Department(null,"测试部"));*/
+        */
+/*departmentMapper.insertSelective(new Department(null,"开发部"));
+        departmentMapper.insertSelective(new Department(null,"测试部"));*//*
+
 
         //员工插入
     }
 }
+*/
