@@ -20,6 +20,30 @@
 
 </head>
 <body>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="empAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">员工添加</h4>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <div class="container">
     <%--标题--%>
     <div class="row">
@@ -30,7 +54,7 @@
     <%--按钮--%>
     <div class="row">
         <div class="col-md-4 col-md-offset-8">
-            <button class="btn btn-primary">新增</button>
+            <button class="btn btn-primary" id="emp_aaa_btn">新增</button>
             <button class="btn btn-danger">删除</button>
 
         </div>
@@ -82,6 +106,11 @@
 <script type="text/javascript">
     $(function () {
         to_page(1);
+        $("#emp_aaa_btn").click(function () {
+            $("#empAddModal").modal(function () {
+                backdrop:"static"
+            })
+        })
     })
 
     function to_page(pn) {
