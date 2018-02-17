@@ -15,12 +15,11 @@
     <result column="gender" jdbcType="CHAR" property="gender" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="d_id" jdbcType="INTEGER" property="dId" />
-    <!-- 指定联合查询部门字段的封装-->
+    <!-- 指定联合查询部门字段的封装将联合查询出来的列放到封装到department中-->
     <association property="department" javaType="com.wuxin.entity.Department">
       <id column="dept_id" property="deptId"></id>
       <result column="dept_name" property="deptName"></result>
     </association>
-    <!--<result column="department" javaType="com.wuxin.entity.Department" property="dId" />-->
 
 
   </resultMap>
@@ -90,7 +89,7 @@
 
   </sql>
 
-  <select id="selectByExampleWithDept" resultMap="WithDept">
+  <select id="selectByExampleWithDept"  resultMap="WithDept">
 
     select
     <if test="distinct">

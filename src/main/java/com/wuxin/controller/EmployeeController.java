@@ -19,6 +19,7 @@ import java.util.Map;
  *
  */
 @Controller
+@RequestMapping(value = "EmployeeController")
 public class EmployeeController {
 
     @Autowired
@@ -30,10 +31,10 @@ public class EmployeeController {
      * @return
      */
 
-    @RequestMapping("/emps")
+    @RequestMapping("emps")
     public String getEmps(@RequestParam(value = "pn",defaultValue = "1")Integer pn, Model model) {
        //引入PageHelper
-       //在查询之前调用,传入页码 和每页的大小
+       //在查询之前调用,传入页码 和每页的大 小
         PageHelper.startPage(pn,5);
         //startPage 后面紧跟的查询就是分页查询
 
