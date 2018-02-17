@@ -7,6 +7,16 @@ public class Employee {
 
     private String gender;
 
+    public String getGenderName() {
+        return genderName;
+    }
+
+    public void setGenderName(String genderName) {
+        this.genderName = genderName;
+    }
+
+    private String genderName;
+
     private String email;
 
     private Integer dId;
