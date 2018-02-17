@@ -3,21 +3,24 @@
 问题1：org.apache.ibatis.binding.BindingException: Invalid bound statement (not found)异常
 将xml文件改到资源文件下加载
 项目搭建过程
-1、新建maven-webapp项目
-2、引入项目依赖的jar包
-   spring webmvc
-   spring jdbc
-   spring aspect(面向切面编程)
-   mybatis
-   mybaits spring(整合适配包)
-   c3p0(数据库连接池)
-   mysql connector(数据连接驱动)
+
+#1、新建maven-webapp项目#
+
+#2、引入项目依赖的jar包#
+   * spring webmvc
+   * spring jdbc
+   * spring aspect(面向切面编程)
+   * mybatis
+   * mybaits spring(整合适配包)
+   * c3p0(数据库连接池)
+   * mysql connector(数据连接驱动)   
+   * jstl
+   * servlet-api
+   * junit
+
+# 3、配置web.xml#
+   * (1)启动spring容器，类路径下加载applicationContext.xml文件,主要配置和业务逻辑有关的内容
    
-   jstl
-   servlet-api
-   junit
- 3、配置web.xml
-   (1)启动spring容器，类路径下加载applicationContext.xml文件,主要配置和业务逻辑有关的内容
    <context-param>
        <param-name>contextConfigLocation</param-name>
        <param-value>classpath:applicationContext.xml</param-value>
@@ -25,7 +28,8 @@
      <listener>
        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
      </listener>
-    (2)springmvc 前端控制器
+    
+   * (2)springmvc 前端控制器
     <servlet>
         <servlet-name>DispatcherServlet</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -40,8 +44,8 @@
         <url-pattern>/</url-pattern>
       </servlet-mapping>
     
-   (3)字符编码过滤器
-   <filter>
+   * (3)字符编码过滤器
+     <filter>
        <filter-name>CharacterEncodingFilter</filter-name>
        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
        <init-param>
@@ -59,16 +63,18 @@
        <url-pattern>/*</url-pattern>
      </filter-mapping>
      
-   (4)使用Rest风格的URI,将页面普通的post请求转为制定的delete或者put请求
-   <filter>
+   * (4)使用Rest风格的URI,将页面普通的post请求转为制定的delete或者put请求
+   
+     <filter>
        <filter-name>HiddenHttpMethodFilter</filter-name>
        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
      </filter>
      <filter-mapping>
        <filter-name>HiddenHttpMethodFilter</filter-name>
        <url-pattern>/*</url-pattern>
-     </filter-mapping>  
-  4、配置springmvc.xml
+     </filter-mapping>
+       
+#  4、配置springmvc.xml#
         <beans>
             <!--      Springmvc配置文件的配置  跟包含网站跳转逻辑-->
                 <context:component-scan base-package="com.wuxin" use-default-filters="false">
@@ -86,7 +92,9 @@
                 <!--能支持spring更高级的功能  映射动态请求-->
                 <mvc:annotation-driven/>
         </beans>
-  4、配置applicationContext.xml
+  
+#  5、配置applicationContext.xml#
+  
     (1)数据库连接池
     <context:property-placeholder location="classpath:dbconfig.properties"/>
         <bean id="pooledDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
@@ -130,19 +138,22 @@
                   <!--以get开头的所有方法-->
                   <tx:method name="get*" read-only="true"/>
           </tx:advice>     
-  5、mybaits-config.xml配置      
-  <configuration>
-      <settings>
-          <!--驼峰命名规则-->
-          <setting name="mapUnderscoreToCamelCase" value="true"/>
-      </settings>
-      <typeAliases>
-          <package name="com.wuxin.entity"/>
-      </typeAliases>
-      <plugins>
-          <plugin interceptor="com.github.pagehelper.PageInterceptor" >
-              <!--分页合理化-->
-              <property name="reasonable" value="true"/>
-          </plugin>
-      </plugins>
-  </configuration>
+  
+  
+
+#6、mybaits-config.xml配置
+ 
+        <settings>
+            <!--驼峰命名规则-->
+            <setting name="mapUnderscoreToCamelCase" value="true"/>
+        </settings>
+        <typeAliases>
+            <package name="com.wuxin.entity"/>
+        </typeAliases>
+        <plugins>
+            <plugin interceptor="com.github.pagehelper.PageInterceptor" >
+                <!--分页合理化-->
+                <property name="reasonable" value="true"/>
+            </plugin>
+        </plugins>
+  

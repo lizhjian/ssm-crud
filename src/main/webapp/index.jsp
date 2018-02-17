@@ -32,11 +32,50 @@
                 <h4 class="modal-title" id="myModalLabel">员工添加</h4>
             </div>
             <div class="modal-body">
-                
+
+
+
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="empName_add_input" class="col-sm-2 control-label">empName</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="empName" class="form-control" id="empName_add_input" placeholder="empName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email_add_input" class="col-sm-2 control-label">email</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="email" class="form-control" id="email_add_input" placeholder="email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email_add_input" class="col-sm-2 control-label">gender</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+                                <input type="radio" name="gender" id="gender1_add_input" value="sex0" checked="checked"> 男
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="gender" id="gender2_add_input" value="sex1"> 女
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email_add_input" class="col-sm-2 control-label">deptName</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" name="dId">
+                                <option></option>
+                            </select>
+                        </div>
+                    </div>
+
+                </form>
+
+
+
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">保存</button>
             </div>
         </div>
     </div>
