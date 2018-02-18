@@ -64,5 +64,29 @@ public class EmployeeController {
         return Msg.success().add("employee",employee);
 
     }
+    @ResponseBody
+    @RequestMapping(value = "/updateEmp",method = RequestMethod.POST)
+    public Msg updateEmp(Employee employee){
+
+        int num = employeeService.updateEmp(employee);
+        if(num==1){
+           return   Msg.success();
+        }else {
+          return    Msg.fail();
+
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/delete/{empId}")
+    public Msg deleteById(@PathVariable("empId") Integer empId){
+       int num =  employeeService.deleteById(empId);
+       if(num==1){
+           return  Msg.success();
+       }else{
+           return  Msg.fail();
+       }
+    }
+
 
 }

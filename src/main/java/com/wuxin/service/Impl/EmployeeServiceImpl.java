@@ -28,4 +28,12 @@ public class EmployeeServiceImpl  implements EmployeeService{
     public Employee getEmp(Integer id){
       return   employeeMapper.selectByPrimaryKey(id);
     }
+
+    public int updateEmp(Employee employee){
+       return   employeeMapper.updateEmp(employee);
+    }
+
+    public int deleteById(Integer id){
+        return employeeMapper.deleteById(id);
+    }
 }

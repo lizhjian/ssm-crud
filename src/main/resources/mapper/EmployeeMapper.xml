@@ -252,4 +252,12 @@
       d_id = #{dId,jdbcType=INTEGER}
     where emp_id = #{empId,jdbcType=INTEGER}
   </update>
+
+  <update id="updateEmp">
+      UPDATE  tbl_emp set email = #{email},gender =#{gender},d_id =#{dId} where emp_id = #{empId}
+  </update>
+
+  <delete id="deleteById">
+    delete FROM  tbl_emp where emp_id = #{id}
+  </delete>
 </mapper>

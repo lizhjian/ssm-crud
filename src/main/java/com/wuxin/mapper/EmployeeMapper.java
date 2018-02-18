@@ -31,4 +31,7 @@ public interface EmployeeMapper {
     int updateByPrimaryKeySelective(Employee record);
 
     int updateByPrimaryKey(Employee record);
+
+    int updateEmp(Employee employee);
+    int deleteById(Integer id);
 }

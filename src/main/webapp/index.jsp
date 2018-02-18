@@ -150,7 +150,7 @@
     <div class="row">
         <div class="col-md-4 col-md-offset-8">
             <button class="btn btn-primary" id="emp_aaa_btn">新增</button>
-            <button class="btn btn-danger">删除</button>
+            <button class="btn btn-danger" id="emp_delete">删除</button>
 
         </div>
 
@@ -200,7 +200,7 @@
 </html>
 <script type="text/javascript">
 
-    var totalRecord;
+    var totalRecord,currentPage;
 
     $(function () {
         to_page(1);
@@ -307,6 +307,7 @@
         $("#page_info_area").empty();
         $("#page_info_area").append("当前"+result.extend.pageInfo.pageNum+"页，总页"+result.extend.pageInfo.pages+"总"+result.extend.pageInfo.total);
         totalRecord  = result.extend.pageInfo.total;
+        currentPage = result.extend.pageInfo.pageNum;
     }
     function buildPageNav(result){
         $("#page_nav_area").empty();
@@ -368,8 +369,27 @@
 
         getDepts("#empUpdateModal select");
         getEmp($(this).attr("edit-id"));
+        $("#emp_update_btn").attr("edit-id",$(this).attr("edit-id"));
         $("#empUpdateModal").modal(function () {
             backdrop:"static"
+        })
+    })
+    $(document).on("click",".delete_btn",function () {
+
+        if(!confirm("确认删除？")){
+             return;
+        }
+        var id = $(this).attr("delete-id");
+
+    //    console.log(id);
+    //    return;
+        $.ajax({
+            url:"${APP_PATH}/EmployeeController/delete/"+id,
+            type:'get',
+            success:function (result) {
+               to_page(currentPage);
+                //console.log(result);
+            }
         })
     })
 
@@ -389,5 +409,27 @@
 
         })
     }
+
+    $("#emp_update_btn").click(function () {
+
+        $.ajax({
+            url:"${APP_PATH}/EmployeeController/updateEmp",
+            type:"post",
+            data:{
+                empId:$("#emp_update_btn").attr("edit-id"),
+                email:$("#email_update_input").val(),
+                gender:$("#empUpdateModal input[name='gender']:checked").val(),
+                dId:$("#empUpdateModal select[name='dId']").val()
+            },
+            success:function (result) {
+                if(result.code*1==100){
+                     $("#empUpdateModal").modal("hide");
+                     to_page(currentPage);
+                }
+             //  console.log(result);
+            }
+        })
+    })
+
 
 </script>
