@@ -22,7 +22,7 @@
 <body>
 
 
-
+<%--员工添加--%>
 <!-- Modal -->
 <div class="modal fade" id="empAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -76,6 +76,62 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 <button type="button" class="btn btn-primary" id="emp_save_btn">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="empUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">员工添加</h4>
+            </div>
+            <div class="modal-body">
+
+
+
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="empName_add_input" class="col-sm-2 control-label">empName</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="empName" class="form-control" id="empName_update_input" placeholder="empName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email_add_input" class="col-sm-2 control-label">email</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="email" class="form-control" id="email_update_input" placeholder="email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email_add_input" class="col-sm-2 control-label">gender</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+                                <input type="radio" name="gender" id="gender1_update_input" value="sex0" checked="checked"> 男
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="gender" id="gender2_update_input" value="sex1"> 女
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email_add_input" class="col-sm-2 control-label">deptName</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" name="dId">
+                                <option></option>
+                            </select>
+                        </div>
+                    </div>
+
+                </form>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="emp_update_btn">更新</button>
             </div>
         </div>
     </div>
@@ -150,7 +206,9 @@
         to_page(1);
         $("#emp_aaa_btn").click(function () {
 
-            getDepts();
+            $("#empAddModal form")[0].reset();
+
+            getDepts("#empAddModal select");
 
             $("#empAddModal").modal(function () {
                 backdrop:"static"
@@ -158,6 +216,7 @@
         })
         
         $("#emp_save_btn").click(function () {
+
 
            // console.log($("empAddModal form").serialize());
 
@@ -180,14 +239,16 @@
         
     })
     //查询所有部门信息
-    function  getDepts() {
+    function  getDepts(ele) {
+
+        $(ele).empty();
         $.ajax({
             url:"${APP_PATH}/DepartmentController/depts",
             type:"get",
             success:function (result) {
                 $.each(result.extend.depts,function () {
                     var optionEld = $("<option></option>").append(this.deptName).attr("value",this.deptId);
-                    optionEld.appendTo("#empAddModal select");
+                    optionEld.appendTo(ele);
                 })
             }
 
@@ -222,9 +283,9 @@
              var genderNameTd = $("<td></td>").append(item.gender=="sex0"?"男":"女");
              var emailTd = $("<td></td>").append(item.email);
              var deptNameTd = $("<td></td>").append(item.department.deptName);
-             var editBtn  =$("<button></button>").addClass("btn btn-primary btn-sm").
+             var editBtn  =$("<button></button>").addClass("btn btn-primary btn-sm edit_btn").
              append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("编辑");
-             var delBtn  =$("<button></button>").addClass("btn btn-danger btn-sm").
+             var delBtn  =$("<button></button>").addClass("btn btn-danger btn-sm delete_btn").
              append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("删除");
 
              var btnTd = $("<td></td>").append(editBtn).append(" ").append(delBtn);
@@ -236,6 +297,8 @@
            append(deptNameTd).
                    append(btnTd).
            appendTo("#emp_table_body");
+           
+
        })
 
 
@@ -300,5 +363,13 @@
         navEle.appendTo("#page_nav_area");
 
     }
+
+    $(document).on("click",".edit_btn",function () {
+
+        getDepts("#empUpdateModal select")
+        $("#empUpdateModal").modal(function () {
+            backdrop:"static"
+        })
+    })
 
 </script>
