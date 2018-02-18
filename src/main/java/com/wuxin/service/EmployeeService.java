@@ -13,4 +13,6 @@ public interface EmployeeService {
     int updateEmp(Employee employee);
     int deleteById(Integer id);
 
+    int deleteByIds(Integer[] empIds);
+
 }

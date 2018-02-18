@@ -34,4 +34,6 @@ public interface EmployeeMapper {
 
     int updateEmp(Employee employee);
     int deleteById(Integer id);
+    int deleteByIds(Integer[] empIds);
+    int deleteByIds(List<Integer> empIds);
 }

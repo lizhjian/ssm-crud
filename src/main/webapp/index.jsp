@@ -150,7 +150,7 @@
     <div class="row">
         <div class="col-md-4 col-md-offset-8">
             <button class="btn btn-primary" id="emp_aaa_btn">新增</button>
-            <button class="btn btn-danger" id="emp_delete">删除</button>
+            <button class="btn btn-danger" id="emp_delete_all">删除</button>
 
         </div>
 
@@ -162,6 +162,9 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
+                    <th>
+                        <input type="checkbox" id="check_all"/>
+                    </th>
                     <th>id</th>
                     <th>姓名</th>
                     <th>性别</th>
@@ -278,6 +281,7 @@
        var  emps = result.extend.pageInfo.list;
        $.each(emps,function (index,item) {
             //console.log(item);
+             var checkBoxTd = $("<td><input type='checkbox' class='check_item'></td>");
              var empIdTd = $("<td></td>").append(item.empId);
              var empNameTd = $("<td></td>").append(item.empName);
              var genderNameTd = $("<td></td>").append(item.gender=="sex0"?"男":"女");
@@ -290,7 +294,8 @@
 
              var btnTd = $("<td></td>").append(editBtn).append(" ").append(delBtn);
 
-           $("<tr></tr>").append(empIdTd).
+           $("<tr></tr>").append(checkBoxTd).
+           append(empIdTd).
            append(empNameTd).
            append(genderNameTd).
            append(emailTd).
@@ -430,6 +435,64 @@
             }
         })
     })
+    //完成全选
+    $("#check_all").click(function () {
+     //   alert($(this).prop("checked"));
+        $(".check_item").prop("checked",$(this).prop("checked"));
+//        alert("");
+    })
+
+    $(document).on("click",".check_item",function () {
+       // alert($(".check_item:checked").length);
+         if($(".check_item:checked").length ==$(".check_item").length){
+             $("#check_all").prop("checked",true);
+         }else{
+             $("#check_all").prop("checked",false);
+         }
+
+        ///  $("check_all").prop()
+    });
+
+    $("#emp_delete_all").click(function () {
+         var  empNames="";
+         var  empIds = [];
+         $.each($(".check_item:checked"),function () {
+            empNames += $(this).parents("tr").find("td:eq(2)").text();
+            empIds.push($(this).parents("tr").find("td:eq(1)").text())
+        })
+        if(empNames=="" || empNames==null){
+             alert("请选择后删除");
+             return;
+        }
+        if(confirm("确认删除"+empNames)){
+            /*表单方式*/
+             /*$.ajax({
+                url:"${APP_PATH}/EmployeeController/deleteByIds",
+                type:"POST",
+                data:{empIds:[1,2],dIds:[3,4]},
+                success:function () {
+                    
+                }
+                
+            })*/
+
+            $.ajax({
+                url:"${APP_PATH}/EmployeeController/deleteByIds",
+                type:"POST",
+                data:JSON.stringify(empIds),
+                contentType: "application/json", //必须这样写
+                success:function (result) {
+                  to_page(currentPage);
+                }
+
+            })
+        }
+//        $(".check_item:checked")
+
+
+    })
+
+
 
 
 </script>

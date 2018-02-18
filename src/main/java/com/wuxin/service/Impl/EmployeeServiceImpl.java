@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("employeeService")
@@ -35,5 +36,15 @@ public class EmployeeServiceImpl  implements EmployeeService{
 
     public int deleteById(Integer id){
         return employeeMapper.deleteById(id);
+    }
+    public int deleteByIds(Integer[] empIds){
+         //用数组删除
+        //return employeeMapper.deleteByIds(empIds);
+       // 用list作为删除删除
+        List<Integer> employeeList = new ArrayList<Integer>();
+        for (Integer id:empIds){
+            employeeList.add(id);
+        }
+        return  employeeMapper.deleteByIds(employeeList);
     }
 }

@@ -88,5 +88,39 @@ public class EmployeeController {
        }
     }
 
+    /**
+     * 表单接收数据方式
+     * 前端传过来的data:{empIds:[1,2],dIds:[3,4]},  后台不管用String[] 或者Integer[]都能接收
+     * @return
+     */
+
+   /* @ResponseBody
+    @RequestMapping(value = "/deleteByIds")
+    public Msg deleteByIds(@RequestParam(value = "empIds[]") Integer[] empIds,@RequestParam(value = "dIds[]") Integer[] dIds){
+
+        System.out.println(empIds);
+        System.out.println(dIds);
+        return  Msg.success();
+
+    }*/
+
+    /**
+     * json方式提交
+     * @param empIds
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/deleteByIds")
+    public Msg deleteByIds(@RequestBody Integer[] empIds){
+
+     //   System.out.println(empIds);
+
+        System.out.println(employeeService.deleteByIds(empIds));
+
+//        System.out.println(dIds);
+        return  Msg.success();
+
+    }
+
 
 }
