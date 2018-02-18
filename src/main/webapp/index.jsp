@@ -146,11 +146,31 @@
     $(function () {
         to_page(1);
         $("#emp_aaa_btn").click(function () {
+
+            getDepts();
+
             $("#empAddModal").modal(function () {
                 backdrop:"static"
             })
         })
     })
+    //查询所有部门信息
+    function  getDepts() {
+        $.ajax({
+            url:"${APP_PATH}/DepartmentController/depts",
+            type:"get",
+            success:function (result) {
+                $.each(result.extend.depts,function () {
+                    var optionEld = $("<option></option>").append(this.deptName).attr("value",this.deptId);
+                    optionEld.appendTo("#empAddModal select");
+                })
+            }
+
+
+        })
+    }
+
+
 
     function to_page(pn) {
         $.ajax({
