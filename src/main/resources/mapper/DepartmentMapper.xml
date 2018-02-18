@@ -8,6 +8,8 @@
 
   <resultMap id="departmentDto" type="com.wuxin.entity.DepartmentDTO">
     <id column="dept_id" jdbcType="INTEGER" property="deptId" />
+<!--    如果写错了 会把多的那边的张三17 赋值给deptName  但是结果集中其他和员工本身属性有关的还是被封装到employeeList中-->
+    <!--<result column="emp_name" jdbcType="VARCHAR" property="deptName" />-->
     <result column="dept_name" jdbcType="VARCHAR" property="deptName" />
     <collection property="employeeList" ofType="com.wuxin.entity.Employee">
       <id column="emp_id" property="empId"></id>
