@@ -75,7 +75,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">保存</button>
+                <button type="button" class="btn btn-primary" id="emp_save_btn">保存</button>
             </div>
         </div>
     </div>
@@ -143,6 +143,9 @@
 
 </html>
 <script type="text/javascript">
+
+    var totalRecord;
+
     $(function () {
         to_page(1);
         $("#emp_aaa_btn").click(function () {
@@ -153,6 +156,28 @@
                 backdrop:"static"
             })
         })
+        
+        $("#emp_save_btn").click(function () {
+
+           // console.log($("empAddModal form").serialize());
+
+            $.ajax({
+                url:"${APP_PATH}/EmployeeController/saveEmp",
+                type:"post",
+                data:$("#empAddModal form").serialize(),
+                success:function (result) {
+                    $("#empAddModal").modal('hide');
+                   to_page(totalRecord);
+//                    console.log(result);
+                }
+
+
+            })
+
+
+        })
+        
+        
     })
     //查询所有部门信息
     function  getDepts() {
@@ -218,6 +243,7 @@
     function buildPageInfo(result) {
         $("#page_info_area").empty();
         $("#page_info_area").append("当前"+result.extend.pageInfo.pageNum+"页，总页"+result.extend.pageInfo.pages+"总"+result.extend.pageInfo.total);
+        totalRecord  = result.extend.pageInfo.total;
     }
     function buildPageNav(result){
         $("#page_nav_area").empty();

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -44,18 +45,19 @@ public class EmployeeController {
 
     /**
      * 分页查找
-     * @param pn
+     * @param employee
      * @return
      */
 
 
 
-   /* @RequestMapping("emps")
-    public String getEmps(@RequestParam(value = "pn",defaultValue = "1")Integer pn, Model model) {
-       //引入PageHelper
-       //在查询之前调用,传入页码 和每页的大 小
+    @ResponseBody
+    @RequestMapping(value = "saveEmp",method = RequestMethod.POST)
+    public Msg saveEmp(Employee employee) {
 
-        return "list";
-    }*/
+        employeeService.saveEmployee(employee);
+
+        return Msg.success();
+    }
 
 }
