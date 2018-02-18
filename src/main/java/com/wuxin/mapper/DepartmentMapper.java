@@ -1,6 +1,7 @@
 package com.wuxin.mapper;
 
 import com.wuxin.entity.Department;
+import com.wuxin.entity.DepartmentDTO;
 import com.wuxin.entity.DepartmentExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
@@ -27,4 +28,6 @@ public interface DepartmentMapper {
     int updateByPrimaryKeySelective(Department record);
 
     int updateByPrimaryKey(Department record);
+
+    DepartmentDTO findempByDept(Integer id);
 }

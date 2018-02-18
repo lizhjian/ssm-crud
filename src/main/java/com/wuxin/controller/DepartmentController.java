@@ -34,4 +34,10 @@ public class DepartmentController {
 
      //   return  Msg.success();
     }
+
+    @ResponseBody
+    @RequestMapping(value = "findempByDept")
+    public  Msg findempByDept(Integer id){
+        return Msg.success().add("emps",departmentService.findempByDept(id));
+    }
 }

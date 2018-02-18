@@ -483,6 +483,7 @@
                 contentType: "application/json", //必须这样写
                 success:function (result) {
                   to_page(currentPage);
+                  $("#check_all").prop("checked",false);
                 }
 
             })

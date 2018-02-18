@@ -1,6 +1,7 @@
 package com.wuxin.service.Impl;
 
 import com.wuxin.entity.Department;
+import com.wuxin.entity.DepartmentDTO;
 import com.wuxin.mapper.DepartmentMapper;
 import com.wuxin.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,8 @@ public class DepartmentServiceImpl implements DepartmentService {
 
        return departmentMapper.selectByExample(null);
 
+    }
+    public DepartmentDTO findempByDept(Integer id){
+       return  departmentMapper.findempByDept(id);
     }
 }
