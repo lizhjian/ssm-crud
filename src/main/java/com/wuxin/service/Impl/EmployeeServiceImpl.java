@@ -25,4 +25,7 @@ public class EmployeeServiceImpl  implements EmployeeService{
     public void saveEmployee(Employee employee){
         employeeMapper.insertSelective(employee);
     }
+    public Employee getEmp(Integer id){
+      return   employeeMapper.selectByPrimaryKey(id);
+    }
 }

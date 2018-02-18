@@ -95,7 +95,7 @@
                     <div class="form-group">
                         <label for="empName_add_input" class="col-sm-2 control-label">empName</label>
                         <div class="col-sm-10">
-                            <input type="text" name="empName" class="form-control" id="empName_update_input" placeholder="empName">
+                            <p  class="form-control-static" id="empName_update_static" placeholder="empName"></p>
                         </div>
                     </div>
                     <div class="form-group">
@@ -284,9 +284,9 @@
              var emailTd = $("<td></td>").append(item.email);
              var deptNameTd = $("<td></td>").append(item.department.deptName);
              var editBtn  =$("<button></button>").addClass("btn btn-primary btn-sm edit_btn").
-             append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("编辑");
+             append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("编辑").attr("edit-id",item.empId);
              var delBtn  =$("<button></button>").addClass("btn btn-danger btn-sm delete_btn").
-             append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("删除");
+             append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("删除").attr("delete-id",item.empId);
 
              var btnTd = $("<td></td>").append(editBtn).append(" ").append(delBtn);
 
@@ -366,10 +366,28 @@
 
     $(document).on("click",".edit_btn",function () {
 
-        getDepts("#empUpdateModal select")
+        getDepts("#empUpdateModal select");
+        getEmp($(this).attr("edit-id"));
         $("#empUpdateModal").modal(function () {
             backdrop:"static"
         })
     })
+
+    function  getEmp(id) {
+        $.ajax({
+            url:"${APP_PATH}/EmployeeController/emp/"+id,
+          //  data:"pn="+pn,
+            type:"get",
+            success:function (result) {
+               // console.log(result);
+              $("#empName_update_static").text(result.extend.employee.empName);
+              $("#email_update_input").val(result.extend.employee.email);
+              $("#empUpdateModal input[name=gender]").val([result.extend.employee.gender]);
+              $("#empUpdateModal select").val([result.extend.employee.dId]);
+
+            }
+
+        })
+    }
 
 </script>

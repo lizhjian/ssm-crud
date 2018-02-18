@@ -8,10 +8,7 @@ import com.wuxin.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.Externalizable;
 import java.util.HashMap;
@@ -58,6 +55,14 @@ public class EmployeeController {
         employeeService.saveEmployee(employee);
 
         return Msg.success();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/emp/{id}",method = RequestMethod.GET)
+    public Msg getEmp(@PathVariable Integer id){
+        Employee employee = employeeService.getEmp(id);
+        return Msg.success().add("employee",employee);
+
     }
 
 }
