@@ -4,9 +4,9 @@
 将xml文件改到资源文件下加载
 项目搭建过程
 
-#1、新建maven-webapp项目#
+# 1、新建maven-webapp项目
 
-#2、引入项目依赖的jar包#
+# 2、引入项目依赖的jar包
    * spring webmvc
    * spring jdbc
    * spring aspect(面向切面编程)
@@ -18,7 +18,7 @@
    * servlet-api
    * junit
 
-# 3、配置web.xml#
+# 3、配置web.xml
    * (1)启动spring容器，类路径下加载applicationContext.xml文件,主要配置和业务逻辑有关的内容
    
    <context-param>
