@@ -184,23 +184,23 @@
   ```
   * 如果多个参数正好是业务的数据模型，可以传入POJO
    * POJO .#{属性名}取出传入的pojo的属性值
-   * Map 如果多个参数不是业务模型中的数据，没有对应的pojo，为了方便，可以传入map
-     * 支持map嵌套
-    ```
-       Map<String,Object> map = new HashMap<String, Object>();
-       Map<String,Integer> mapch = new HashMap<String, Integer>();
-       mapch.put("id",17);
-       map.put("idtest",mapch);
-       return employeeMapper.deleteById(map);
-       
-       <delete id="deleteById">
-           delete FROM  tbl_emp where emp_id = #{idtest.id}
-       </delete>       
-    ```
+     * Map 如果多个参数不是业务模型中的数据，没有对应的pojo，为了方便，可以传入map
+       * 支持map嵌套
+        ```
+          Map<String,Object> map = new HashMap<String, Object>();
+            Map<String,Integer> mapch = new HashMap<String, Integer>();
+            mapch.put("id",17);
+            map.put("idtest",mapch);
+            return employeeMapper.deleteById(map);
+            
+            <delete id="deleteById">
+                delete FROM  tbl_emp where emp_id = #{idtest.id}
+            </delete>
+        ```
   * 如果多个参数不是业务模型中的数据，但是经常要使用，推荐来编写一个TO(Transfer-Object)
     数据对象
   * 扩展
-   * 第一种
+    * 第一种
    ```
    public Employee getEmp(@Param("id")Integer id,String lastName);
    取值：id===>#{id,param1}   lastName===>#{param2}
@@ -241,3 +241,81 @@
    *  由于全局配置中jdbcTypeForNull= other oracle不支持
       * .#{emial，jdbcType=OTHER}
       *  jdbcTypeForNull = NULL
+## 返回值类型
+   *  封装成一个map
+   ```
+    resultType ="map"
+   ```
+   *  多条记录封装一个map Map<Integer.Employee>
+      键是这条记录主键值，值是封装后的java对象
+   ```
+      告诉mybatis  id 作为主键
+     @MapKey("id")
+     public Map<Integer,Employee> getEmp（String name）
+     
+     <select id="xxx" resultType = entity> 
+        select * from xx
+     </select>
+      
+   ```   
+   * 自定义封装规则resultMap
+   ```
+   <resultMap type="entity" id="id">
+      <id column ="id" property="id"></id>
+          列           属性
+      <result column="name" property ="name"/>    
+   </resultMap>
+   ```
+   *  复杂版  员工包含部门对象
+      *  级联属性
+   ```
+   
+   <resultMap type="entity" id ="xxx">
+        <id column="last_name" property="lastName"></id>
+        <result column ="gender"  property="gender"  />
+        
+        属性.属性 的方式进行封装
+        <result column ="did" property="dept.id">
+        <result column ="dept_name" property="dept.departmentName">
+        
+   </resultMap>
+   ```
+   
+   *  association 
+   ```
+   <resultMap type="entity" id ="xxx">
+           <id column="last_name" property="lastName"></id>
+           <result column ="gender"  property="gender"  />
+           
+                                  属性
+           <association property="dept" javaType="xxx">
+                <result column ="d_id"  property="id"  />
+                <result column ="dept_name"  property="departName"  />
+           </association>
+           
+      </resultMap>
+   ```   
+   *  association 分布查询
+   ```
+      select * from employee where id = 1
+      select * from dept where  id = 1
+      
+      <resultMap type="entity" id ="xxx">
+                 <id column="last_name" property="lastName"></id>
+                 <result column ="gender"  property="gender"  />
+                 
+                                        属性                        d_id作为select的参数
+                 <association property="dept" select ="报名.方法id"column="d_id">
+                      <result column ="d_id"  property="id"  />
+                      <result column ="dept_name"  property="departName"  />
+                 </association>
+                 
+            </resultMap>
+       
+   ``` 
+   *  延迟加载（同上  全局配置文件中加两个配置）
+     mybatis-config 
+     ```
+     <setting name ="lazyLoadingEnabled" value="true">
+     <setting name ="aggressivelazyLoading" value="false">
+     ```
