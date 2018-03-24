@@ -162,8 +162,9 @@
     * {参数名}，取出参数
   * 多个参数:mybaitis 会做特殊处理，多个参数会被封装成一个map,
      key：param1,param2,param3  value:传入的值 #{}就是从map中获取指定的key值
-     取值用 #{0},#{1}  或者#{param1}  #{param2}
      注：select 要选择 resultType
+     * 取值用 #{0},#{1}  或者#{param1}  #{param2}
+     * 设置mapper列表@Param("id) 
      
   ```
     List<Recipe> findRecipeByPage(@Param("recipeName")String recipeName,@Param("recipeType")String recipeType);
@@ -181,5 +182,20 @@
    	</select>    
        
   ```
-
-    
+  * 如果多个参数正好是业务的数据模型，可以传入POJO
+   * POJO .#{属性名}取出传入的pojo的属性值
+   * Map 如果多个参数不是业务模型中的数据，没有对应的pojo，为了方便，可以传入map
+    * 支持map嵌套
+    ```
+       Map<String,Object> map = new HashMap<String, Object>();
+       Map<String,Integer> mapch = new HashMap<String, Integer>();
+       mapch.put("id",17);
+       map.put("idtest",mapch);
+       return employeeMapper.deleteById(map);
+       
+       <delete id="deleteById">
+           delete FROM  tbl_emp where emp_id = #{idtest.id}
+       </delete>       
+    ```
+  * 如果多个参数不是业务模型中的数据，但是经常要使用，推荐来编写一个TO(Transfer-Object)
+    数据对象
