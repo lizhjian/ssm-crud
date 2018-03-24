@@ -185,7 +185,7 @@
   * 如果多个参数正好是业务的数据模型，可以传入POJO
    * POJO .#{属性名}取出传入的pojo的属性值
    * Map 如果多个参数不是业务模型中的数据，没有对应的pojo，为了方便，可以传入map
-    * 支持map嵌套
+     * 支持map嵌套
     ```
        Map<String,Object> map = new HashMap<String, Object>();
        Map<String,Integer> mapch = new HashMap<String, Integer>();
@@ -232,5 +232,12 @@
     分表情况下：按照年份分表拆分
         select * from  2016_salary  where  xxx;
         select * from tbl_employee order by ${}
-    
-   
+   ### .更丰富的用法
+   *  规定参数规则
+      javaType  jdbcType model(存储过程) numericScale
+      resultMap typeHandler jdbcTypeName expression 
+      jdbcType 通常需要在某种特定的条件下被设置
+      在我们数据为null的时候有些数据库可能不能识别mybatis对null的处理，比如oracle
+   *  由于全局配置中jdbcTypeForNull= other oracle不支持
+      * .#{emial，jdbcType=OTHER}
+      *  jdbcTypeForNull = NULL
