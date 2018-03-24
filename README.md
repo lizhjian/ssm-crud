@@ -3,10 +3,10 @@
 问题1：org.apache.ibatis.binding.BindingException: Invalid bound statement (not found)异常
 将xml文件改到资源文件下加载
 项目搭建过程
+## 创建sring-mybatis过程
+### 1、新建maven-webapp项目
 
-## 1、新建maven-webapp项目
-
-## 2、引入项目依赖的jar包
+### 2、引入项目依赖的jar包
    * spring webmvc
    * spring jdbc
    * spring aspect(面向切面编程)
@@ -18,7 +18,7 @@
    * servlet-api
    * junit
 
-## 3、配置web.xml
+### 3、配置web.xml
    * (1)启动spring容器，类路径下加载applicationContext.xml文件,主要配置和业务逻辑有关的内容
    
    <context-param>
@@ -74,7 +74,7 @@
        <url-pattern>/*</url-pattern>
      </filter-mapping>
        
-##  4、配置springmvc.xml
+###  4、配置springmvc.xml
         <beans>
             <!--      Springmvc配置文件的配置  跟包含网站跳转逻辑-->
                 <context:component-scan base-package="com.wuxin" use-default-filters="false">
@@ -93,7 +93,7 @@
                 <mvc:annotation-driven/>
         </beans>
   
-##  5、配置applicationContext.xml
+###  5、配置applicationContext.xml
   
     (1)数据库连接池
     <context:property-placeholder location="classpath:dbconfig.properties"/>
@@ -141,7 +141,7 @@
   
   
 
-## 6、mybaits-config.xml配置
+### 6、mybaits-config.xml配置
  
         <settings>
             <!--驼峰命名规则-->
@@ -156,4 +156,30 @@
                 <property name="reasonable" value="true"/>
             </plugin>
         </plugins>
-  
+## 参数传递
+  * 单个参数
+    * mybatis不会做特殊处理
+    * {参数名}，取出参数
+  * 多个参数:mybaitis 会做特殊处理，多个参数会被封装成一个map,
+     key：param1,param2,param3  value:传入的值 #{}就是从map中获取指定的key值
+     取值用 #{0},#{1}  或者#{param1}  #{param2}
+     注：select 要选择 resultType
+     
+  ```
+    List<Recipe> findRecipeByPage(@Param("recipeName")String recipeName,@Param("recipeType")String recipeType);
+    
+       
+   	<select id = "findRecipeByPage" resultType="wuxin.order.entity.RecipeDto">
+   	   select id id,recipe_name recipeName ,recipe_code recipeCode  , recipe_type recipeType,week, create_time createTime, update_time updateTime ,effect_time effectTime from wx_recipe where 1=1
+   	   <if test="recipeName !=null and recipeName !='' ">
+   	       and recipe_name like CONCAT(CONCAT('%',#{recipeName}),'%')
+   	   </if>
+   		<if test="recipeType !=null and recipeType !='' ">
+   			and recipe_type =#{recipeType}
+   		</if>
+   		order BY effect_time ASC
+   	</select>    
+       
+  ```
+
+    
