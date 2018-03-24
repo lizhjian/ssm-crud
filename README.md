@@ -221,4 +221,16 @@
    public Empoyee getEmpById(List<Integer> ids)
       取值：取出第一个id值，#{list[0]} 
   ```
+## 参数的获取
+   * .#{}获取map中额值或者pojo对象属性的值
+   * .${}获取map中额值或者pojo对象属性的值
+   ### 区别
+   * .#{}是以预编译的形式，将参数设置到sql语句中，PreparedStatement防止sql注入
+   * .${}取出的值直接拼接在sql语句中
+   大多情况下，取参数的值都应该去使用#{};
+   原生jdbc不支持占位置的地方，我们就可以使用${}进行取值
+    分表情况下：按照年份分表拆分
+        select * from  2016_salary  where  xxx;
+        select * from tbl_employee order by ${}
     
+   
