@@ -319,3 +319,23 @@
      <setting name ="lazyLoadingEnabled" value="true">
      <setting name ="aggressivelazyLoading" value="false">
      ```
+   * 部门关联员工
+     
+     SELECT * from tbl_emp ,tnl_dept where tbl_emp.d_id = tnl_dept.dept_id  and dept_id=1
+      
+     <resultMap type="xxx" id="MyDept">
+        <id column ="did" property ="id">
+        <result column="dename" property="dename" />
+     !!!   collection 定义关联集合类型属性的封装规则
+     !!!   ofType指定集合里面元素的类型
+         <collection  property="emps" oType="entity">
+             <id></id>
+             <result></result>
+         </collection>
+         
+     </resultMap>
+     <select>
+     </select>
+     
+      
+     
