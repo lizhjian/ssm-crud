@@ -13,9 +13,9 @@
         </commentGenerator>
         
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/ssm_crud?useSSL=true"
-                        userId="root"
-                        password="123456">
+                        connectionURL="jdbc:mysql://10.16.16.14:3306/azeroth?zeroDateTimeBehavior=convertToNull&amp;useSSL=true"
+                        userId="dev_crm"
+                        password="ziroomdb">
         </jdbcConnection>
 
         <javaTypeResolver >
@@ -25,26 +25,25 @@
 
         <!--指定javaBean生成的位置-->
         <javaModelGenerator
-                targetPackage="com.wuxin.entity"
-                targetProject=".\src\main\java">
+                targetPackage="com.ziroom.azeroth.entity.AchievementUser"
+
+                targetProject="src">
             <property name="enableSubPackages" value="true" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
        <!-- 指定sql映射文件生成的位置-->
         <sqlMapGenerator
-                targetPackage="com.wuxin.mapper"
-                targetProject=".\src\main\java">
+                targetPackage="com.ziroom.azeroth.mapper.azeroth"
+                targetProject="src">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
          <!--指定dao接口生成位置-->
         <javaClientGenerator type="XMLMAPPER"
-                             targetPackage="com.wuxin.mapper"
-                             targetProject=".\src\main\java">
+                             targetPackage="com.ziroom.azeroth.mapper.azeroth"
+                             targetProject="src">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
         <!-- 指定每个表的生成策略-->
-        <table  tableName="tbl_emp" domainObjectName="Employee" ></table>
-        <table  tableName="tnl_dept" domainObjectName="Department" ></table>
-
+        <table  tableName="t_arena_realtime" domainObjectName="ArenaRealTime" ></table>
     </context>
 </generatorConfiguration>
