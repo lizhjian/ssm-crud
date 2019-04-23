@@ -1,5 +1,6 @@
 package com.wuxin.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.wuxin.entity.Employee;
@@ -111,16 +112,15 @@ public class EmployeeController {
      */
     @ResponseBody
     @RequestMapping(value = "/deleteByIds")
-    public Msg deleteByIds(@RequestBody Integer[] empIds){
+    public Msg deleteByIds(@RequestBody Integer[] empIds) {
 
-     //   System.out.println(empIds);
+        //   System.out.println(empIds);
 
         System.out.println(employeeService.deleteByIds(empIds));
 
 //        System.out.println(dIds);
-        return  Msg.success();
+
+        return Msg.success();
 
     }
-
-
 }
