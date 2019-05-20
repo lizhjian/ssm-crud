@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ziroom.azeroth.mapper.azeroth.GoalTargetUserMapper">
+  <resultMap id="BaseResultMap" type="com.ziroom.azeroth.entity.GoalTargetUser">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="base_target_id" jdbcType="INTEGER" property="baseTargetId" />
+    <result column="azeroth_keeper_type" jdbcType="VARCHAR" property="azerothKeeperType" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="target_order" jdbcType="INTEGER" property="targetOrder" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="last_modify_date" jdbcType="TIMESTAMP" property="lastModifyDate" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_goal_target_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ziroom.azeroth.entity.GoalTargetUser">
+    insert into t_goal_target_user (id, base_target_id, azeroth_keeper_type, 
+      parent_id, target_order, create_date, 
+      last_modify_date)
+    values (#{id,jdbcType=BIGINT}, #{baseTargetId,jdbcType=INTEGER}, #{azerothKeeperType,jdbcType=VARCHAR}, 
+      #{parentId,jdbcType=BIGINT}, #{targetOrder,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{lastModifyDate,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.ziroom.azeroth.entity.GoalTargetUser">
+    update t_goal_target_user
+    set base_target_id = #{baseTargetId,jdbcType=INTEGER},
+      azeroth_keeper_type = #{azerothKeeperType,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      target_order = #{targetOrder,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      last_modify_date = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, base_target_id, azeroth_keeper_type, parent_id, target_order, create_date, 
+    last_modify_date
+    from t_goal_target_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, base_target_id, azeroth_keeper_type, parent_id, target_order, create_date, 
+    last_modify_date
+    from t_goal_target_user
+  </select>
+</mapper>
