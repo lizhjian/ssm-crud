@@ -15,4 +15,5 @@ public interface EmployeeService {
 
     int deleteByIds(Integer[] empIds);
 
+    void insertEntity() throws Exception;
 }

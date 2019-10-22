@@ -17,6 +17,10 @@
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
 
+  <!--<context-param>-->
+    <!--<param-name>contextConfigLocation</param-name>-->
+    <!--<param-value>classpath:spring-*.xml</param-value>-->
+  <!--</context-param>-->
   <!--前端控制器-->
   <servlet>
     <servlet-name>DispatcherServlet</servlet-name>

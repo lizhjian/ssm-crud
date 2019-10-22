@@ -3,6 +3,8 @@ package com.wuxin.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.wuxin.entity.Msg;
 import com.wuxin.entity.TestEntity;
+import com.wuxin.service.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +21,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(value = "/test")
 public class TestController {
 
+    @Autowired
+    private EmployeeService employeeService;
+
 
     /**
      * json方式提交
@@ -27,13 +32,21 @@ public class TestController {
      */
     @ResponseBody
     @RequestMapping(value = "/testParams")
-    public Msg testParams(String name,Integer age){
+    public Msg testParams(String name,Integer age) throws Exception{
+       // try{
+            //
+//        JSONObject jsonObject = new JSONObject();
+//        System.out.println(name);
+//        System.out.println(age);
 
-        JSONObject jsonObject = new JSONObject();
-        System.out.println(name);
-        System.out.println(age);
 
-        return  Msg.success();
+            employeeService.insertEntity();
+//            return  Msg.success();
+//        }catch (Exception e){
+//            e.printStackTrace();
+//            return null;
+//        }
+        return null;
 
     }
 

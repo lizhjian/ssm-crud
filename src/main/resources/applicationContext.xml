@@ -9,7 +9,11 @@
   <!-- <context:property-placeholder location="classpath:dbconfig.properties"/>-->
 
     <!--对service的扫描放到applicationContext.xml里面-->
-    <context:component-scan base-package="com.wuxin.service"></context:component-scan>
+    <context:component-scan base-package="com.wuxin">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
 
     <context:property-placeholder location="classpath:dbconfig.properties"/>
 
@@ -39,29 +43,31 @@
         <!--控制数据源-->
          <property name="dataSource" ref="pooledDataSource"></property>
     </bean>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <!--开启事务基于注解的事物，使用xml配置形式的事物（必要）-->
-    <aop:config>
-        <!--切入点-->
-        <aop:pointcut expression="execution(* com.wuxin.service..* (..))" id="txPoint"/>
-        <!--配置事务增强-->
-        <aop:advisor  advice-ref="txAdvice" pointcut-ref="txPoint"/>
-    </aop:config>
+        <!--开启事务基于注解的事物，使用xml配置形式的事物（必要）-->
+    <!--<aop:config>-->
+        <!--&lt;!&ndash;切入点&ndash;&gt;-->
+        <!--<aop:pointcut expression="execution(* com.wuxin.service..* (..))" id="txPoint"/>-->
+        <!--&lt;!&ndash;配置事务增强&ndash;&gt;-->
+        <!--<aop:advisor  advice-ref="txAdvice" pointcut-ref="txPoint"/>-->
+    <!--</aop:config>-->
 
-    <!--配置事物增强，事物如何切入-->
-    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+    <!--&lt;!&ndash;配置事物增强，事物如何切入&ndash;&gt;-->
+    <!--<tx:advice id="txAdvice" transaction-manager="transactionManager">-->
 
-        <tx:attributes>
-            <!--所有方法都是事物方法-->
-            <tx:method name="*"/>
-            <!--以get开头的所有方法-->
-            <tx:method name="get*" read-only="true"/>
-        </tx:attributes>
+        <!--<tx:attributes>-->
+            <!--&lt;!&ndash;所有方法都是事物方法&ndash;&gt;-->
+            <!--&lt;!&ndash;<tx:method name="*" rollback-for="java.lang.Exception"/>&ndash;&gt;-->
+            <!--<tx:method name="*" rollback-for="java.lang.Exception"/>-->
+            <!--&lt;!&ndash;以get开头的所有方法&ndash;&gt;-->
+            <!--<tx:method name="get*" read-only="true"/>-->
+        <!--</tx:attributes>-->
 
-    </tx:advice>
+    <!--</tx:advice>-->
 
     <!--spring 配置文件的核心点（数据源 与mybatis的整合）-->
 <!--    Spring配置文件核心点 与mybatis整合-->
-
+   <import resource="spring-aop.xml"/>
 
 </beans>

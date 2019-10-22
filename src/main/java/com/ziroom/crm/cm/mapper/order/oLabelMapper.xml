@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ziroom.crm.cm.mapper.order.oLabelMapper">
+  <resultMap id="BaseResultMap" type="com.ziroom.crm.cm.domain.order.oLabel">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="business_key" jdbcType="BIGINT" property="businessKey" />
+    <result column="business_type" jdbcType="VARCHAR" property="businessType" />
+    <result column="label_value" jdbcType="VARCHAR" property="labelValue" />
+    <result column="label_name" jdbcType="VARCHAR" property="labelName" />
+    <result column="is_del" jdbcType="INTEGER" property="isDel" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="creator_code" jdbcType="VARCHAR" property="creatorCode" />
+    <result column="last_modify_time" jdbcType="TIMESTAMP" property="lastModifyTime" />
+    <result column="modifier_code" jdbcType="VARCHAR" property="modifierCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, business_key, business_type, label_value, label_name, is_del, create_time, creator_code, 
+    last_modify_time, modifier_code
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.ziroom.crm.cm.domain.order.oLabelKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from o_label
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.ziroom.crm.cm.domain.order.oLabelKey">
+    delete from o_label
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ziroom.crm.cm.domain.order.oLabel">
+    insert into o_label (id, business_key, business_type, 
+      label_value, label_name, is_del, 
+      create_time, creator_code, last_modify_time, 
+      modifier_code)
+    values (#{id,jdbcType=BIGINT}, #{businessKey,jdbcType=BIGINT}, #{businessType,jdbcType=VARCHAR}, 
+      #{labelValue,jdbcType=VARCHAR}, #{labelName,jdbcType=VARCHAR}, #{isDel,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{creatorCode,jdbcType=VARCHAR}, #{lastModifyTime,jdbcType=TIMESTAMP}, 
+      #{modifierCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ziroom.crm.cm.domain.order.oLabel">
+    insert into o_label
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="businessKey != null">
+        business_key,
+      </if>
+      <if test="businessType != null">
+        business_type,
+      </if>
+      <if test="labelValue != null">
+        label_value,
+      </if>
+      <if test="labelName != null">
+        label_name,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="creatorCode != null">
+        creator_code,
+      </if>
+      <if test="lastModifyTime != null">
+        last_modify_time,
+      </if>
+      <if test="modifierCode != null">
+        modifier_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="businessKey != null">
+        #{businessKey,jdbcType=BIGINT},
+      </if>
+      <if test="businessType != null">
+        #{businessType,jdbcType=VARCHAR},
+      </if>
+      <if test="labelValue != null">
+        #{labelValue,jdbcType=VARCHAR},
+      </if>
+      <if test="labelName != null">
+        #{labelName,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorCode != null">
+        #{creatorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyTime != null">
+        #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifierCode != null">
+        #{modifierCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ziroom.crm.cm.domain.order.oLabel">
+    update o_label
+    <set>
+      <if test="businessKey != null">
+        business_key = #{businessKey,jdbcType=BIGINT},
+      </if>
+      <if test="businessType != null">
+        business_type = #{businessType,jdbcType=VARCHAR},
+      </if>
+      <if test="labelValue != null">
+        label_value = #{labelValue,jdbcType=VARCHAR},
+      </if>
+      <if test="labelName != null">
+        label_name = #{labelName,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorCode != null">
+        creator_code = #{creatorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyTime != null">
+        last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifierCode != null">
+        modifier_code = #{modifierCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ziroom.crm.cm.domain.order.oLabel">
+    update o_label
+    set business_key = #{businessKey,jdbcType=BIGINT},
+      business_type = #{businessType,jdbcType=VARCHAR},
+      label_value = #{labelValue,jdbcType=VARCHAR},
+      label_name = #{labelName,jdbcType=VARCHAR},
+      is_del = #{isDel,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      creator_code = #{creatorCode,jdbcType=VARCHAR},
+      last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP},
+      modifier_code = #{modifierCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
