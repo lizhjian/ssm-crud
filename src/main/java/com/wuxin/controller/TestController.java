@@ -25,6 +25,7 @@ public class TestController {
     private EmployeeService employeeService;
 
 
+
     /**
      * json方式提交
      * @param name age
@@ -40,7 +41,7 @@ public class TestController {
 //        System.out.println(age);
 
 
-            employeeService.insertEntity();
+         //   employeeService.insertEntity();
 //            return  Msg.success();
 //        }catch (Exception e){
 //            e.printStackTrace();
@@ -81,6 +82,23 @@ public class TestController {
         System.out.println(entity.getName());
 
         return  Msg.success();
-
     }
+
+    /**
+     * json方式提交
+     * @param entity
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/queryList")
+    public Msg queryList(@RequestBody  TestEntity entity){
+
+        employeeService.queryList();
+
+        return  Msg.success();
+    }
+
+
+
+
 }

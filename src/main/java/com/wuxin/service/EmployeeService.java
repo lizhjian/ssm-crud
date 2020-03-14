@@ -1,6 +1,7 @@
 package com.wuxin.service;
 
 import com.wuxin.entity.Employee;
+import com.wuxin.entity.OrderDtl;
 
 import java.util.List;
 
@@ -15,5 +16,5 @@ public interface EmployeeService {
 
     int deleteByIds(Integer[] empIds);
 
-    void insertEntity() throws Exception;
+    List<OrderDtl> queryList();
 }
