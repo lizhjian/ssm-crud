@@ -1,30 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wuxin.mapper.OrderPriMapper">
+
   <resultMap id="BaseResultMap" type="com.wuxin.entity.OrderPri">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="order_num" jdbcType="VARCHAR" property="orderNum" />
     <result column="is_del" jdbcType="INTEGER" property="isDel" />
+    <collection property="dtlList" resultMap="dtlListResultMap" />
   </resultMap>
+  <resultMap id="dtlListResultMap" type="com.wuxin.entity.OrderDtl">
+    <id column="dtlId" property="id"/>
+    <result column="dtlOrderNum" property="orderNum"/>
+    <result column="dtlproId" property="proId"/>
+    <result column="dtlIsDel" property="isDel"/>
+  </resultMap>
+
   <sql id="Base_Column_List">
     id, order_num, is_del
   </sql>
+
   <select id="selectByPrimaryKey" parameterType="com.wuxin.entity.OrderPri" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from order_pri
     where id = #{id,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="com.wuxin.entity.OrderPri">
     delete from order_pri
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="com.wuxin.entity.OrderPri">
     insert into order_pri (id, order_num, is_del
       )
     values (#{id,jdbcType=INTEGER}, #{orderNum,jdbcType=VARCHAR}, #{isDel,jdbcType=INTEGER}
       )
   </insert>
+
   <insert id="insertSelective" parameterType="com.wuxin.entity.OrderPri">
     insert into order_pri
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -68,4 +81,18 @@
       is_del = #{isDel,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectByParams" resultMap="BaseResultMap">
+    select * from order_pri
+  </select>
+  <select id="selectByParamsAll" resultMap="BaseResultMap">
+    select
+        p.id,
+        p.order_num,
+        p.is_del,
+        d.order_num  dtlOrderNum,
+        d.pro_id dtlproId,
+        d.is_del dtlIsDel
+     from order_pri  p left join
+    order_dtl d on p.order_num = d.order_num
+  </select>
 </mapper>

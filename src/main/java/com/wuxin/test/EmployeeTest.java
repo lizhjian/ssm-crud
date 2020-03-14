@@ -1,5 +1,6 @@
 package com.wuxin.test;
 
+import com.alibaba.fastjson.JSON;
 import com.wuxin.service.EmployeeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +17,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
  * </pre>
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-//@WebAppConfiguration
 @ContextConfiguration(locations={"classpath:applicationContext.xml"})
 public class EmployeeTest {
 
@@ -25,7 +25,11 @@ public class EmployeeTest {
 
     @Test
     public void testQuery(){
-        employeeService.queryList();
+        System.out.println(JSON.toJSONString(employeeService.queryList()));
+    }
+    @Test
+    public void testQueryAll(){
+        System.out.println(JSON.toJSONString(employeeService.queryListAll()));
     }
 
 }

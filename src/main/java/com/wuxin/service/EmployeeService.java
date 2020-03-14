@@ -2,6 +2,7 @@ package com.wuxin.service;
 
 import com.wuxin.entity.Employee;
 import com.wuxin.entity.OrderDtl;
+import com.wuxin.entity.OrderPri;
 
 import java.util.List;
 
@@ -16,5 +17,7 @@ public interface EmployeeService {
 
     int deleteByIds(Integer[] empIds);
 
-    List<OrderDtl> queryList();
+    List<OrderPri> queryList();
+
+    List<OrderPri> queryListAll();
 }

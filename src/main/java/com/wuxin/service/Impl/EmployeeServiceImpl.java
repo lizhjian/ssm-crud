@@ -2,6 +2,7 @@ package com.wuxin.service.Impl;
 
 import com.wuxin.entity.Employee;
 import com.wuxin.entity.OrderDtl;
+import com.wuxin.entity.OrderPri;
 import com.wuxin.mapper.EmployeeMapper;
 import com.wuxin.mapper.OrderPriMapper;
 import com.wuxin.service.EmployeeService;
@@ -55,8 +56,12 @@ public class EmployeeServiceImpl  implements EmployeeService{
     }
 
 
-    public List<OrderDtl> queryList() {
+    public List<OrderPri> queryList() {
         System.out.println("========");
-        return null;
+        return orderPriMapper.selectByParams(null);
+    }
+    public List<OrderPri> queryListAll() {
+        System.out.println("========");
+        return orderPriMapper.selectByParamsAll(null);
     }
 }
