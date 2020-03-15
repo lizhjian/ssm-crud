@@ -51,4 +51,8 @@ public interface OrderPriMapper {
 
     List<OrderPri> selectListByMulEntity(@Param("pri") OrderPri pri, @Param("dtl") OrderDtl dtl);
 
+    int insertBatch(List<OrderPri> orderPris);
+
+    int updateByIds(List<OrderPri> orderPris);
+
 }

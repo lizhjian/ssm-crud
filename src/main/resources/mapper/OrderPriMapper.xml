@@ -272,4 +272,20 @@
       </if>
     </where>
   </select>
+
+  <insert id = "insertBatch">
+     insert into order_pri(order_num, is_del)values
+    <foreach collection="list" item="it" separator=",">
+      (#{it.orderNum, jdbcType = VARCHAR}, #{it.isDel, jdbcType = INTEGER})
+    </foreach>
+  </insert>
+
+  <update id="updateByIds">
+    update order_pri set is_del = 1
+    where id in
+    <foreach collection="list" separator="," item="it" open="(" close=")">
+      #{it.id, jdbcType = INTEGER}
+    </foreach>
+  </update>
+
 </mapper>

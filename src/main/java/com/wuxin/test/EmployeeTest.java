@@ -149,4 +149,19 @@ public class EmployeeTest extends CommonTest {
         dtl.setProId(1);
         System.out.println(JSON.toJSONString(orderPriMapper.selectListByMulEntity(pri, dtl)));
     }
+
+    @Test
+    public void testInsertV1(){
+        List<OrderPri> orderPris = new ArrayList<OrderPri>();
+        orderPris.add(new OrderPri(null,"004", 1, null));
+        orderPris.add(new OrderPri(null,"005", 2, null));
+        System.out.println(JSON.toJSONString(orderPriMapper.insertBatch(orderPris)));
+    }
+    @Test
+    public void testUpdateV1(){
+        List<OrderPri> orderPris = new ArrayList<OrderPri>();
+        orderPris.add(new OrderPri(1,"004", 1, null));
+        orderPris.add(new OrderPri(2,"005", 2, null));
+        System.out.println(JSON.toJSONString(orderPriMapper.updateByIds(orderPris)));
+    }
 }
