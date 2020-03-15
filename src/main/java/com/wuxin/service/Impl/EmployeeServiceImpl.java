@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Transactional(rollbackFor = Exception.class)
 //@Transactional
 public class EmployeeServiceImpl  implements EmployeeService{
 
@@ -23,6 +22,11 @@ public class EmployeeServiceImpl  implements EmployeeService{
 
     @Autowired
     private OrderPriMapper orderPriMapper;
+
+    public List<OrderPri> queryList() {
+        orderPriMapper.selectByParams(null);
+        return orderPriMapper.selectByParams(null);
+    }
 
     public List<Employee> getAll(){
       //这不是分页查询
@@ -55,13 +59,36 @@ public class EmployeeServiceImpl  implements EmployeeService{
         return  employeeMapper.deleteByIds(employeeList);
     }
 
-
-    public List<OrderPri> queryList() {
-        System.out.println("========");
-        return orderPriMapper.selectByParams(null);
-    }
     public List<OrderPri> queryListAll() {
         System.out.println("========");
         return orderPriMapper.selectByParamsAll(null);
+    }
+
+    public List<OrderPri> selectByField(Integer id, String orderNum) {
+        System.out.println("========");
+        return orderPriMapper.selectByField(id, orderNum);
+    }
+
+    public List<OrderPri> selectByFieldV2(Integer id, String orderNum) {
+        return orderPriMapper.selectByFieldV2(id, orderNum);
+    }
+
+    public int updateField(Integer id, String orderNum, Integer isDel) {
+        return orderPriMapper.updateField(id, orderNum, isDel);
+    }
+    public int updateFieldV2(Integer id, String orderNum, Integer isDel) {
+        return orderPriMapper.updateFieldV2(id, orderNum, isDel);
+    }
+
+    public List<OrderPri> selectBatch(int[] arr) {
+        return orderPriMapper.selectBatch(arr);
+    }
+
+    public List<OrderPri> selectBatchList(List<Integer> idList) {
+        return orderPriMapper.selectBatchList(idList);
+    }
+
+    public List<OrderPri> selectByCase(Integer id, String orderNum, Integer isDel) {
+        return orderPriMapper.selectByCase(id, orderNum, isDel);
     }
 }

@@ -1,10 +1,14 @@
 package com.wuxin.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrderPri {
 
     private Integer id;
@@ -14,4 +18,6 @@ public class OrderPri {
     private Integer isDel;
 
     List<OrderDtl> dtlList;
+
+
 }
