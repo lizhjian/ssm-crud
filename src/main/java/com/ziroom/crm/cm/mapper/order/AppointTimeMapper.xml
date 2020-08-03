@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ziroom.crm.cm.mapper.order.AppointTimeMapper">
+  <resultMap id="BaseResultMap" type="com.ziroom.crm.cm.domain.order.AppointTime">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="hoom_id" jdbcType="VARCHAR" property="hoomId" />
+    <result column="room_id" jdbcType="VARCHAR" property="roomId" />
+    <result column="house_type" jdbcType="INTEGER" property="houseType" />
+    <result column="contract_code" jdbcType="VARCHAR" property="contractCode" />
+    <result column="appoint_start_time" jdbcType="TIMESTAMP" property="appointStartTime" />
+    <result column="appoint_end_time" jdbcType="TIMESTAMP" property="appointEndTime" />
+    <result column="contract_start_date" jdbcType="DATE" property="contractStartDate" />
+    <result column="contract_end_date" jdbcType="DATE" property="contractEndDate" />
+    <result column="is_del" jdbcType="INTEGER" property="isDel" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="creator_code" jdbcType="VARCHAR" property="creatorCode" />
+    <result column="last_modify_time" jdbcType="TIMESTAMP" property="lastModifyTime" />
+    <result column="modifier_code" jdbcType="VARCHAR" property="modifierCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, hoom_id, room_id, house_type, contract_code, appoint_start_time, appoint_end_time, 
+    contract_start_date, contract_end_date, is_del, create_time, creator_code, last_modify_time, 
+    modifier_code
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.ziroom.crm.cm.domain.order.AppointTime" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from o_appoint_time
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.ziroom.crm.cm.domain.order.AppointTime">
+    delete from o_appoint_time
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ziroom.crm.cm.domain.order.AppointTime">
+    insert into o_appoint_time (id, hoom_id, room_id, 
+      house_type, contract_code, appoint_start_time, 
+      appoint_end_time, contract_start_date, contract_end_date, 
+      is_del, create_time, creator_code, 
+      last_modify_time, modifier_code)
+    values (#{id,jdbcType=BIGINT}, #{hoomId,jdbcType=VARCHAR}, #{roomId,jdbcType=VARCHAR}, 
+      #{houseType,jdbcType=INTEGER}, #{contractCode,jdbcType=VARCHAR}, #{appointStartTime,jdbcType=TIMESTAMP}, 
+      #{appointEndTime,jdbcType=TIMESTAMP}, #{contractStartDate,jdbcType=DATE}, #{contractEndDate,jdbcType=DATE}, 
+      #{isDel,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{creatorCode,jdbcType=VARCHAR}, 
+      #{lastModifyTime,jdbcType=TIMESTAMP}, #{modifierCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ziroom.crm.cm.domain.order.AppointTime">
+    insert into o_appoint_time
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="hoomId != null">
+        hoom_id,
+      </if>
+      <if test="roomId != null">
+        room_id,
+      </if>
+      <if test="houseType != null">
+        house_type,
+      </if>
+      <if test="contractCode != null">
+        contract_code,
+      </if>
+      <if test="appointStartTime != null">
+        appoint_start_time,
+      </if>
+      <if test="appointEndTime != null">
+        appoint_end_time,
+      </if>
+      <if test="contractStartDate != null">
+        contract_start_date,
+      </if>
+      <if test="contractEndDate != null">
+        contract_end_date,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="creatorCode != null">
+        creator_code,
+      </if>
+      <if test="lastModifyTime != null">
+        last_modify_time,
+      </if>
+      <if test="modifierCode != null">
+        modifier_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="hoomId != null">
+        #{hoomId,jdbcType=VARCHAR},
+      </if>
+      <if test="roomId != null">
+        #{roomId,jdbcType=VARCHAR},
+      </if>
+      <if test="houseType != null">
+        #{houseType,jdbcType=INTEGER},
+      </if>
+      <if test="contractCode != null">
+        #{contractCode,jdbcType=VARCHAR},
+      </if>
+      <if test="appointStartTime != null">
+        #{appointStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appointEndTime != null">
+        #{appointEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contractStartDate != null">
+        #{contractStartDate,jdbcType=DATE},
+      </if>
+      <if test="contractEndDate != null">
+        #{contractEndDate,jdbcType=DATE},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorCode != null">
+        #{creatorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyTime != null">
+        #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifierCode != null">
+        #{modifierCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ziroom.crm.cm.domain.order.AppointTime">
+    update o_appoint_time
+    <set>
+      <if test="hoomId != null">
+        hoom_id = #{hoomId,jdbcType=VARCHAR},
+      </if>
+      <if test="roomId != null">
+        room_id = #{roomId,jdbcType=VARCHAR},
+      </if>
+      <if test="houseType != null">
+        house_type = #{houseType,jdbcType=INTEGER},
+      </if>
+      <if test="contractCode != null">
+        contract_code = #{contractCode,jdbcType=VARCHAR},
+      </if>
+      <if test="appointStartTime != null">
+        appoint_start_time = #{appointStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appointEndTime != null">
+        appoint_end_time = #{appointEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contractStartDate != null">
+        contract_start_date = #{contractStartDate,jdbcType=DATE},
+      </if>
+      <if test="contractEndDate != null">
+        contract_end_date = #{contractEndDate,jdbcType=DATE},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorCode != null">
+        creator_code = #{creatorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyTime != null">
+        last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifierCode != null">
+        modifier_code = #{modifierCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ziroom.crm.cm.domain.order.AppointTime">
+    update o_appoint_time
+    set hoom_id = #{hoomId,jdbcType=VARCHAR},
+      room_id = #{roomId,jdbcType=VARCHAR},
+      house_type = #{houseType,jdbcType=INTEGER},
+      contract_code = #{contractCode,jdbcType=VARCHAR},
+      appoint_start_time = #{appointStartTime,jdbcType=TIMESTAMP},
+      appoint_end_time = #{appointEndTime,jdbcType=TIMESTAMP},
+      contract_start_date = #{contractStartDate,jdbcType=DATE},
+      contract_end_date = #{contractEndDate,jdbcType=DATE},
+      is_del = #{isDel,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      creator_code = #{creatorCode,jdbcType=VARCHAR},
+      last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP},
+      modifier_code = #{modifierCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ziroom.crm.cm.domain.order.AppointTime">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="hoom_id" jdbcType="VARCHAR" property="hoomId" />
+    <result column="room_id" jdbcType="VARCHAR" property="roomId" />
+    <result column="house_type" jdbcType="INTEGER" property="houseType" />
+    <result column="contract_code" jdbcType="VARCHAR" property="contractCode" />
+    <result column="appoint_start_time" jdbcType="TIMESTAMP" property="appointStartTime" />
+    <result column="appoint_end_time" jdbcType="TIMESTAMP" property="appointEndTime" />
+    <result column="contract_start_date" jdbcType="DATE" property="contractStartDate" />
+    <result column="contract_end_date" jdbcType="DATE" property="contractEndDate" />
+    <result column="is_del" jdbcType="INTEGER" property="isDel" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="creator_code" jdbcType="VARCHAR" property="creatorCode" />
+    <result column="last_modify_time" jdbcType="TIMESTAMP" property="lastModifyTime" />
+    <result column="modifier_code" jdbcType="VARCHAR" property="modifierCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, hoom_id, room_id, house_type, contract_code, appoint_start_time, appoint_end_time, 
+    contract_start_date, contract_end_date, is_del, create_time, creator_code, last_modify_time, 
+    modifier_code
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.ziroom.crm.cm.domain.order.AppointTime" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from o_appoint_time
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.ziroom.crm.cm.domain.order.AppointTime">
+    delete from o_appoint_time
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ziroom.crm.cm.domain.order.AppointTime">
+    insert into o_appoint_time (id, hoom_id, room_id, 
+      house_type, contract_code, appoint_start_time, 
+      appoint_end_time, contract_start_date, contract_end_date, 
+      is_del, create_time, creator_code, 
+      last_modify_time, modifier_code)
+    values (#{id,jdbcType=BIGINT}, #{hoomId,jdbcType=VARCHAR}, #{roomId,jdbcType=VARCHAR}, 
+      #{houseType,jdbcType=INTEGER}, #{contractCode,jdbcType=VARCHAR}, #{appointStartTime,jdbcType=TIMESTAMP}, 
+      #{appointEndTime,jdbcType=TIMESTAMP}, #{contractStartDate,jdbcType=DATE}, #{contractEndDate,jdbcType=DATE}, 
+      #{isDel,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{creatorCode,jdbcType=VARCHAR}, 
+      #{lastModifyTime,jdbcType=TIMESTAMP}, #{modifierCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ziroom.crm.cm.domain.order.AppointTime">
+    insert into o_appoint_time
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="hoomId != null">
+        hoom_id,
+      </if>
+      <if test="roomId != null">
+        room_id,
+      </if>
+      <if test="houseType != null">
+        house_type,
+      </if>
+      <if test="contractCode != null">
+        contract_code,
+      </if>
+      <if test="appointStartTime != null">
+        appoint_start_time,
+      </if>
+      <if test="appointEndTime != null">
+        appoint_end_time,
+      </if>
+      <if test="contractStartDate != null">
+        contract_start_date,
+      </if>
+      <if test="contractEndDate != null">
+        contract_end_date,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="creatorCode != null">
+        creator_code,
+      </if>
+      <if test="lastModifyTime != null">
+        last_modify_time,
+      </if>
+      <if test="modifierCode != null">
+        modifier_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="hoomId != null">
+        #{hoomId,jdbcType=VARCHAR},
+      </if>
+      <if test="roomId != null">
+        #{roomId,jdbcType=VARCHAR},
+      </if>
+      <if test="houseType != null">
+        #{houseType,jdbcType=INTEGER},
+      </if>
+      <if test="contractCode != null">
+        #{contractCode,jdbcType=VARCHAR},
+      </if>
+      <if test="appointStartTime != null">
+        #{appointStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appointEndTime != null">
+        #{appointEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contractStartDate != null">
+        #{contractStartDate,jdbcType=DATE},
+      </if>
+      <if test="contractEndDate != null">
+        #{contractEndDate,jdbcType=DATE},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorCode != null">
+        #{creatorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyTime != null">
+        #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifierCode != null">
+        #{modifierCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ziroom.crm.cm.domain.order.AppointTime">
+    update o_appoint_time
+    <set>
+      <if test="hoomId != null">
+        hoom_id = #{hoomId,jdbcType=VARCHAR},
+      </if>
+      <if test="roomId != null">
+        room_id = #{roomId,jdbcType=VARCHAR},
+      </if>
+      <if test="houseType != null">
+        house_type = #{houseType,jdbcType=INTEGER},
+      </if>
+      <if test="contractCode != null">
+        contract_code = #{contractCode,jdbcType=VARCHAR},
+      </if>
+      <if test="appointStartTime != null">
+        appoint_start_time = #{appointStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appointEndTime != null">
+        appoint_end_time = #{appointEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contractStartDate != null">
+        contract_start_date = #{contractStartDate,jdbcType=DATE},
+      </if>
+      <if test="contractEndDate != null">
+        contract_end_date = #{contractEndDate,jdbcType=DATE},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorCode != null">
+        creator_code = #{creatorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyTime != null">
+        last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifierCode != null">
+        modifier_code = #{modifierCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ziroom.crm.cm.domain.order.AppointTime">
+    update o_appoint_time
+    set hoom_id = #{hoomId,jdbcType=VARCHAR},
+      room_id = #{roomId,jdbcType=VARCHAR},
+      house_type = #{houseType,jdbcType=INTEGER},
+      contract_code = #{contractCode,jdbcType=VARCHAR},
+      appoint_start_time = #{appointStartTime,jdbcType=TIMESTAMP},
+      appoint_end_time = #{appointEndTime,jdbcType=TIMESTAMP},
+      contract_start_date = #{contractStartDate,jdbcType=DATE},
+      contract_end_date = #{contractEndDate,jdbcType=DATE},
+      is_del = #{isDel,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      creator_code = #{creatorCode,jdbcType=VARCHAR},
+      last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP},
+      modifier_code = #{modifierCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ziroom.crm.cm.domain.order.AppointTime">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="hoom_id" jdbcType="VARCHAR" property="hoomId" />
+    <result column="room_id" jdbcType="VARCHAR" property="roomId" />
+    <result column="house_type" jdbcType="INTEGER" property="houseType" />
+    <result column="contract_code" jdbcType="VARCHAR" property="contractCode" />
+    <result column="appoint_start_time" jdbcType="TIMESTAMP" property="appointStartTime" />
+    <result column="appoint_end_time" jdbcType="TIMESTAMP" property="appointEndTime" />
+    <result column="contract_start_date" jdbcType="DATE" property="contractStartDate" />
+    <result column="contract_end_date" jdbcType="DATE" property="contractEndDate" />
+    <result column="is_del" jdbcType="INTEGER" property="isDel" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="creator_code" jdbcType="VARCHAR" property="creatorCode" />
+    <result column="last_modify_time" jdbcType="TIMESTAMP" property="lastModifyTime" />
+    <result column="modifier_code" jdbcType="VARCHAR" property="modifierCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, hoom_id, room_id, house_type, contract_code, appoint_start_time, appoint_end_time, 
+    contract_start_date, contract_end_date, is_del, create_time, creator_code, last_modify_time, 
+    modifier_code
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.ziroom.crm.cm.domain.order.AppointTime" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from o_appoint_time
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.ziroom.crm.cm.domain.order.AppointTime">
+    delete from o_appoint_time
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ziroom.crm.cm.domain.order.AppointTime">
+    insert into o_appoint_time (id, hoom_id, room_id, 
+      house_type, contract_code, appoint_start_time, 
+      appoint_end_time, contract_start_date, contract_end_date, 
+      is_del, create_time, creator_code, 
+      last_modify_time, modifier_code)
+    values (#{id,jdbcType=BIGINT}, #{hoomId,jdbcType=VARCHAR}, #{roomId,jdbcType=VARCHAR}, 
+      #{houseType,jdbcType=INTEGER}, #{contractCode,jdbcType=VARCHAR}, #{appointStartTime,jdbcType=TIMESTAMP}, 
+      #{appointEndTime,jdbcType=TIMESTAMP}, #{contractStartDate,jdbcType=DATE}, #{contractEndDate,jdbcType=DATE}, 
+      #{isDel,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{creatorCode,jdbcType=VARCHAR}, 
+      #{lastModifyTime,jdbcType=TIMESTAMP}, #{modifierCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ziroom.crm.cm.domain.order.AppointTime">
+    insert into o_appoint_time
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="hoomId != null">
+        hoom_id,
+      </if>
+      <if test="roomId != null">
+        room_id,
+      </if>
+      <if test="houseType != null">
+        house_type,
+      </if>
+      <if test="contractCode != null">
+        contract_code,
+      </if>
+      <if test="appointStartTime != null">
+        appoint_start_time,
+      </if>
+      <if test="appointEndTime != null">
+        appoint_end_time,
+      </if>
+      <if test="contractStartDate != null">
+        contract_start_date,
+      </if>
+      <if test="contractEndDate != null">
+        contract_end_date,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="creatorCode != null">
+        creator_code,
+      </if>
+      <if test="lastModifyTime != null">
+        last_modify_time,
+      </if>
+      <if test="modifierCode != null">
+        modifier_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="hoomId != null">
+        #{hoomId,jdbcType=VARCHAR},
+      </if>
+      <if test="roomId != null">
+        #{roomId,jdbcType=VARCHAR},
+      </if>
+      <if test="houseType != null">
+        #{houseType,jdbcType=INTEGER},
+      </if>
+      <if test="contractCode != null">
+        #{contractCode,jdbcType=VARCHAR},
+      </if>
+      <if test="appointStartTime != null">
+        #{appointStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appointEndTime != null">
+        #{appointEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contractStartDate != null">
+        #{contractStartDate,jdbcType=DATE},
+      </if>
+      <if test="contractEndDate != null">
+        #{contractEndDate,jdbcType=DATE},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorCode != null">
+        #{creatorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyTime != null">
+        #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifierCode != null">
+        #{modifierCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ziroom.crm.cm.domain.order.AppointTime">
+    update o_appoint_time
+    <set>
+      <if test="hoomId != null">
+        hoom_id = #{hoomId,jdbcType=VARCHAR},
+      </if>
+      <if test="roomId != null">
+        room_id = #{roomId,jdbcType=VARCHAR},
+      </if>
+      <if test="houseType != null">
+        house_type = #{houseType,jdbcType=INTEGER},
+      </if>
+      <if test="contractCode != null">
+        contract_code = #{contractCode,jdbcType=VARCHAR},
+      </if>
+      <if test="appointStartTime != null">
+        appoint_start_time = #{appointStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appointEndTime != null">
+        appoint_end_time = #{appointEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contractStartDate != null">
+        contract_start_date = #{contractStartDate,jdbcType=DATE},
+      </if>
+      <if test="contractEndDate != null">
+        contract_end_date = #{contractEndDate,jdbcType=DATE},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorCode != null">
+        creator_code = #{creatorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyTime != null">
+        last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifierCode != null">
+        modifier_code = #{modifierCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ziroom.crm.cm.domain.order.AppointTime">
+    update o_appoint_time
+    set hoom_id = #{hoomId,jdbcType=VARCHAR},
+      room_id = #{roomId,jdbcType=VARCHAR},
+      house_type = #{houseType,jdbcType=INTEGER},
+      contract_code = #{contractCode,jdbcType=VARCHAR},
+      appoint_start_time = #{appointStartTime,jdbcType=TIMESTAMP},
+      appoint_end_time = #{appointEndTime,jdbcType=TIMESTAMP},
+      contract_start_date = #{contractStartDate,jdbcType=DATE},
+      contract_end_date = #{contractEndDate,jdbcType=DATE},
+      is_del = #{isDel,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      creator_code = #{creatorCode,jdbcType=VARCHAR},
+      last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP},
+      modifier_code = #{modifierCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

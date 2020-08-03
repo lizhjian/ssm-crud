@@ -1,6 +1,8 @@
 package com.wuxin.test;
 
 import com.alibaba.fastjson.JSON;
+import com.wuxin.entity.CycleTypeEnums;
+import com.wuxin.entity.CycleTypeUtils;
 import com.wuxin.entity.OrderDtl;
 import com.wuxin.entity.OrderPri;
 import com.wuxin.mapper.OrderPriMapper;
@@ -163,5 +165,15 @@ public class EmployeeTest extends CommonTest {
         orderPris.add(new OrderPri(1,"004", 1, null));
         orderPris.add(new OrderPri(2,"005", 2, null));
         System.out.println(JSON.toJSONString(orderPriMapper.updateByIds(orderPris)));
+    }
+
+
+    @Test
+    public void testCgliB(){
+//        System.out.println(JSON.toJSONString(CycleTypeEnums.standardCycle));
+//        System.out.println(JSON.toJSONString(CycleTypeEnums.recentlyCycle));
+
+        System.out.println(JSON.toJSONString(CycleTypeUtils.standardCycles));
+        System.out.println(JSON.toJSONString(CycleTypeUtils.recentlyCycles));
     }
 }

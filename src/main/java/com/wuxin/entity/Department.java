@@ -30,4 +30,10 @@ public class Department {
         this.deptId = deptId;
         this.deptName = deptName;
     }
+
+    public void add(Integer a, Integer b){
+        System.out.println("================");
+        System.out.println(a + b);
+    }
+
 }

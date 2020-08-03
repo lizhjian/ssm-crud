@@ -34,5 +34,18 @@
 
     <!--能支持spring更高级的功能  映射动态请求-->
     <mvc:annotation-driven/>
+    <import resource="spring-config.xml"/>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- 对所有的请求拦截使用/** ,对某个模块下的请求拦截使用：/myPath/** -->
+            <mvc:mapping path="/**"/>
+            <ref bean="userAccessInterceptor"/>
+        </mvc:interceptor>
+        <!--<mvc:interceptor>
+          <mvc:mapping path="/**"/>
+          <ref bean="securityAuthInterceptor"/>
+        </mvc:interceptor>-->
+    </mvc:interceptors>
 
 </beans>

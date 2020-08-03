@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ziroom.crm.cm.mapper.activity.ActivityRecordMapper">
+  <resultMap id="BaseResultMap" type="com.ziroom.crm.cm.domain.activity.ActivityRecord">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="keeper_code" jdbcType="VARCHAR" property="keeperCode" />
+    <result column="keeper_name" jdbcType="VARCHAR" property="keeperName" />
+    <result column="org_name" jdbcType="VARCHAR" property="orgName" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+    <result column="register_time" jdbcType="TIMESTAMP" property="registerTime" />
+    <result column="action_type" jdbcType="VARCHAR" property="actionType" />
+    <result column="sign_time" jdbcType="TIMESTAMP" property="signTime" />
+    <result column="house_type" jdbcType="VARCHAR" property="houseType" />
+    <result column="keeper_type" jdbcType="VARCHAR" property="keeperType" />
+    <result column="is_del" jdbcType="INTEGER" property="isDel" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_code" jdbcType="VARCHAR" property="createCode" />
+    <result column="last_modify_time" jdbcType="TIMESTAMP" property="lastModifyTime" />
+    <result column="last_modify_code" jdbcType="VARCHAR" property="lastModifyCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, keeper_code, keeper_name, org_name, uid, user_phone, register_time, action_type, 
+    sign_time, house_type, keeper_type, is_del, create_time, create_code, last_modify_time, 
+    last_modify_code
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.ziroom.crm.cm.domain.activity.ActivityRecordKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from o_activity_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.ziroom.crm.cm.domain.activity.ActivityRecordKey">
+    delete from o_activity_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ziroom.crm.cm.domain.activity.ActivityRecord">
+    insert into o_activity_record (id, keeper_code, keeper_name, 
+      org_name, uid, user_phone, 
+      register_time, action_type, sign_time, 
+      house_type, keeper_type, is_del, 
+      create_time, create_code, last_modify_time, 
+      last_modify_code)
+    values (#{id,jdbcType=BIGINT}, #{keeperCode,jdbcType=VARCHAR}, #{keeperName,jdbcType=VARCHAR}, 
+      #{orgName,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, 
+      #{registerTime,jdbcType=TIMESTAMP}, #{actionType,jdbcType=VARCHAR}, #{signTime,jdbcType=TIMESTAMP}, 
+      #{houseType,jdbcType=VARCHAR}, #{keeperType,jdbcType=VARCHAR}, #{isDel,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createCode,jdbcType=VARCHAR}, #{lastModifyTime,jdbcType=TIMESTAMP}, 
+      #{lastModifyCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ziroom.crm.cm.domain.activity.ActivityRecord">
+    insert into o_activity_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="keeperCode != null">
+        keeper_code,
+      </if>
+      <if test="keeperName != null">
+        keeper_name,
+      </if>
+      <if test="orgName != null">
+        org_name,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="userPhone != null">
+        user_phone,
+      </if>
+      <if test="registerTime != null">
+        register_time,
+      </if>
+      <if test="actionType != null">
+        action_type,
+      </if>
+      <if test="signTime != null">
+        sign_time,
+      </if>
+      <if test="houseType != null">
+        house_type,
+      </if>
+      <if test="keeperType != null">
+        keeper_type,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createCode != null">
+        create_code,
+      </if>
+      <if test="lastModifyTime != null">
+        last_modify_time,
+      </if>
+      <if test="lastModifyCode != null">
+        last_modify_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="keeperCode != null">
+        #{keeperCode,jdbcType=VARCHAR},
+      </if>
+      <if test="keeperName != null">
+        #{keeperName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null">
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null">
+        #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actionType != null">
+        #{actionType,jdbcType=VARCHAR},
+      </if>
+      <if test="signTime != null">
+        #{signTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="houseType != null">
+        #{houseType,jdbcType=VARCHAR},
+      </if>
+      <if test="keeperType != null">
+        #{keeperType,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createCode != null">
+        #{createCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyTime != null">
+        #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyCode != null">
+        #{lastModifyCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ziroom.crm.cm.domain.activity.ActivityRecord">
+    update o_activity_record
+    <set>
+      <if test="keeperCode != null">
+        keeper_code = #{keeperCode,jdbcType=VARCHAR},
+      </if>
+      <if test="keeperName != null">
+        keeper_name = #{keeperName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null">
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null">
+        register_time = #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actionType != null">
+        action_type = #{actionType,jdbcType=VARCHAR},
+      </if>
+      <if test="signTime != null">
+        sign_time = #{signTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="houseType != null">
+        house_type = #{houseType,jdbcType=VARCHAR},
+      </if>
+      <if test="keeperType != null">
+        keeper_type = #{keeperType,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createCode != null">
+        create_code = #{createCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyTime != null">
+        last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyCode != null">
+        last_modify_code = #{lastModifyCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ziroom.crm.cm.domain.activity.ActivityRecord">
+    update o_activity_record
+    set keeper_code = #{keeperCode,jdbcType=VARCHAR},
+      keeper_name = #{keeperName,jdbcType=VARCHAR},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      register_time = #{registerTime,jdbcType=TIMESTAMP},
+      action_type = #{actionType,jdbcType=VARCHAR},
+      sign_time = #{signTime,jdbcType=TIMESTAMP},
+      house_type = #{houseType,jdbcType=VARCHAR},
+      keeper_type = #{keeperType,jdbcType=VARCHAR},
+      is_del = #{isDel,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_code = #{createCode,jdbcType=VARCHAR},
+      last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP},
+      last_modify_code = #{lastModifyCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

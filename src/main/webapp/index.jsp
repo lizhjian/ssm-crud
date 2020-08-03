@@ -279,7 +279,7 @@
 
         $("#emp_table_body").empty();
        var  emps = result.extend.pageInfo.list;
-       $.each(emps,function (index,item) {
+       $.each(emps,function (code,item) {
             //console.log(item);
              var checkBoxTd = $("<td><input type='checkbox' class='check_item'></td>");
              var empIdTd = $("<td></td>").append(item.empId);
@@ -352,7 +352,7 @@
 
 
         ul.append(firstPageLi).append(prePageLi);
-        $.each(result.extend.pageInfo.navigatepageNums,function(index,item){
+        $.each(result.extend.pageInfo.navigatepageNums,function(code,item){
              var numLi = $("<li ></li>").append($("<a></a>").append(item));
              if(result.extend.pageInfo.pageNum ==item){
                  numLi.addClass("active");

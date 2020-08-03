@@ -17,4 +17,8 @@
         </aop:aspect>
     </aop:config>
 
+    <bean id="userAccessInterceptor"
+          class="com.wuxin.interceptor.CommonControllerInterceptor">
+    </bean>
+
 </beans>

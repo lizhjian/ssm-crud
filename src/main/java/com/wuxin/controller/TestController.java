@@ -4,11 +4,17 @@ import com.alibaba.fastjson.JSONObject;
 import com.wuxin.entity.Msg;
 import com.wuxin.entity.TestEntity;
 import com.wuxin.service.EmployeeService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
 
 /**
  * <pre>
@@ -25,6 +31,11 @@ public class TestController {
     private EmployeeService employeeService;
 
 
+    private static final Logger log = LoggerFactory.getLogger(TestController.class);
+
+
+    @Autowired
+    private ThreadPoolTaskExecutor taskExecutor;
 
     /**
      * json方式提交
@@ -47,6 +58,16 @@ public class TestController {
 //            e.printStackTrace();
 //            return null;
 //        }
+        FutureTask futureTask = new FutureTask(new Callable() {
+            public Object call() throws Exception {
+                Thread.sleep(10000);
+                return null;
+            }
+        });
+
+        taskExecutor.submit(futureTask);
+        futureTask.get();
+
         return null;
 
     }
